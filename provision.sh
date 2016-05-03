@@ -30,22 +30,21 @@ apt-get install -y python-pip python-dev libyaml-dev libssl-dev gnupg
 apt-get install -y git
 sudo apt-get install -y emacs24-nox
 
-su - vagrant
-
-# git
-git config --global user.name au9ustine
-git config --global user.email duke.augustine@gmail.com
-git config --global core.editor "emacs -nw"
-
 # emacs
-if [ -d ~/projects/dotfiles ]; then
-    cd ~/projects/dotfiles
+if [ -d /home/vagrant/projects/dotfiles ]; then
+    cd /home/vagrant/projects/dotfiles
     git pull origin master
-    cd ~
+    cd 
 else
     git clone https://au9ustine@github.com/org_au9ustine/dotfiles /home/vagrant/projects/dotfiles
 fi
-rsync -acvzP ~/projects/dotfiles/dotemacs ~/.emacs
+rsync -acvzP /home/vagrant/projects/dotfiles/dotgitconfig /home/vagrant/.gitconfig
+chown vagrant:vagrant /home/vagrant/.gitconfig
+rsync -acvzP /home/vagrant/projects/dotfiles/dotemacs /home/vagrant/.emacs
+chown vagrant:vagrant /home/vagrant/.emacs
+rsync -acvzP /home/vagrant/projects/dotfiles/Makefile.dist /home/vagrant/Makefile
+chown vagrant:vagrant /home/vagrant/Makefile
+
 
 # docker
 DOCKER_VERSION=1.8.3-0~trusty
