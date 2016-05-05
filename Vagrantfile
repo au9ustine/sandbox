@@ -12,7 +12,8 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "aperture-science"
+  config.vm.box = "ubuntu/trusty64"
+  # config.vm.box = "aperture-science"
   # config.vm.box = "debian/jessie64"
   config.vm.hostname = "aperture-science"
 
@@ -24,7 +25,7 @@ Vagrant.configure(2) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
 
   config.ssh.private_key_path = "~/.ssh/id_rsa"
   config.ssh.forward_agent = true
@@ -43,8 +44,9 @@ Vagrant.configure(2) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  # config.vm.synced_folder "/Users/austin.shao/projects", "/home/vagrant/projects" # for Mac
-  config.vm.synced_folder "/home/au9ustine/projects", "/home/vagrant/projects" # for Linux
+  config.vm.synced_folder "/Users/austin.shao/projects", "/home/vagrant/projects"
+  config.vm.synced_folder "/Users/austin.shao/tmp", "/home/vagrant/tmp"
+  config.vm.synced_folder "/users/austin.shao/repos", "/home/vagrant/repos"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
