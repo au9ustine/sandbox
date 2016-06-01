@@ -26,13 +26,18 @@ deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security multiverse" > /etc/apt
 apt-get update
 
 # install prerequisites
-apt-get install -y python-pip \
-    python-dev \
-    libyaml-dev \
-    libssl-dev \
-    gnupg git \
+apt-get install -y \
+    emacs24-nox \
+    git \
+    gnupg \
     lftp \
-    emacs24-nox
+    libffi-dev \
+    libssl-dev \
+    libyaml-dev \
+    python-dev \
+    python-pip \
+    python3 \
+    python3-dev
 
 # emacs
 if [ -d /home/vagrant/projects/dotfiles ]; then
@@ -58,3 +63,8 @@ sudo usermod -aG docker vagrant
 
 # docker-compose
 sudo pip install docker-compose==1.4.1
+
+# other pip eggs
+sudo pip install \
+    'requests[security]' \
+    nose
