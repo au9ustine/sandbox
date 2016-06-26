@@ -2,5 +2,8 @@
 
 if [ `ps aux | grep ssh-agent | grep -v grep | wc -l` -lt 1 ]; then
     eval $(ssh-agent)
-    ssh-add -k ~/.ssh/id_rsa
+fi
+
+if [ `ssh-add -l | grep '<pub_key_fingerprint>' | wc -l` -lt 1 ]; then
+    ssh-add -k <priv_key_path>
 fi

@@ -37,13 +37,17 @@ apt-get install -y \
     python-dev \
     python-pip \
     python3 \
-    python3-dev
+    python3-dev \
+    zsh
+
+# zsh
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 # emacs
 if [ -d /home/vagrant/projects/dotfiles ]; then
     cd /home/vagrant/projects/dotfiles
     git pull origin master
-    cd 
+    cd
 else
     git clone https://au9ustine@github.com/org_au9ustine/dotfiles /home/vagrant/projects/dotfiles
 fi
@@ -53,7 +57,12 @@ rsync -acvzP /home/vagrant/projects/dotfiles/dotemacs /home/vagrant/.emacs
 chown vagrant:vagrant /home/vagrant/.emacs
 rsync -acvzP /home/vagrant/projects/dotfiles/Makefile.dist /home/vagrant/Makefile
 chown vagrant:vagrant /home/vagrant/Makefile
+rsync -acvzP /home/vagrant/projects/dotfiles/dotzshrc /home/vagrant/.zshrc
+chown vagrant:vagrant /home/vagrant/.zshrc
 
+# golang
+wget -c -O - http://golangtc.com/static/go/1.6.2/go1.6.2.linux-amd64.tar.gz | sudo tar -C /usr/local -xzv
+mkdir -pv $HOME/projects/gopath
 
 # docker
 DOCKER_VERSION=1.8.3-0~trusty
